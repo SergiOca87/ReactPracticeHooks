@@ -22,8 +22,8 @@ export default () => {
 	return (
 		<div>
 			{/* <Accordion items={items} /> */}
-			{/* <Search /> */}
-			<Filter options={['Vue', 'React', 'Javascript']} />
+			<Search />
+			{/* <Filter options={['Vue', 'React', 'Javascript']} /> */}
 		</div>
 	);
 };
