@@ -4,6 +4,8 @@ import Search from './components/Search';
 import Filter from './components/Filter';
 import Dropdown from './components/Dropdown';
 import Translate from './components/Translate';
+import Route from './components/Route';
+import Header from './components/Header';
 
 const items = [
 	{
@@ -35,21 +37,34 @@ const options = [
 	},
 ];
 
+const filterOptions = ['React', 'Vue', 'Javascript'];
+
 export default () => {
 	//useState can be defined on the App component and passed down (state and stateSetter func) to child Components as props
 	//That way we could use this state on several Components on our APp if needed
 	const [selected, setSelected] = useState(options[0]);
 	return (
 		<div>
-			<Translate />
-			{/* <Accordion items={items} /> */}
-			{/* <Search /> */}
-			{/* <Filter options={['Vue', 'React', 'Javascript']} /> */}
-			{/* <Dropdown
-				options={options}
-				selected={selected}
-				onSelectedChange={setSelected}
-			/> */}
+			<Header />
+			<Route path="/">
+				<Accordion items={items} />
+			</Route>
+			<Route path="/list">
+				<Search />
+			</Route>
+			<Route path="/filter">
+				<Filter options={filterOptions} />
+			</Route>
+			<Route path="/translate">
+				<Translate />
+			</Route>
+			<Route path="/dropdown">
+				<Dropdown
+					options={options}
+					selected={selected}
+					onSelectedChange={setSelected}
+				/>
+			</Route>
 		</div>
 	);
 };
