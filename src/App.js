@@ -37,6 +37,39 @@ const options = [
 	},
 ];
 
+const Cards = [
+	{
+		type: 'React',
+		name: 'A React based card',
+		icon: 'FaReact',
+		id: 1,
+	},
+	{
+		type: 'React',
+		name: 'A React based card',
+		icon: 'FaReact',
+		id: 2,
+	},
+	{
+		type: 'React',
+		name: 'A React based card',
+		icon: 'FaReact',
+		id: 3,
+	},
+	{
+		type: 'Vue',
+		name: 'A Vue based card',
+		icon: 'FaVuejs',
+		id: 4,
+	},
+	{
+		type: 'Javascript',
+		name: 'A Javascript based card',
+		icon: 'DiJavascript1',
+		id: 5,
+	},
+];
+
 const filterOptions = ['React', 'Vue', 'Javascript'];
 
 export default () => {
@@ -53,7 +86,7 @@ export default () => {
 				<Search />
 			</Route>
 			<Route path="/filter">
-				<Filter options={filterOptions} />
+				<Filter options={filterOptions} list={Cards} />
 			</Route>
 			<Route path="/translate">
 				<Translate />

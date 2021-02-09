@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import FilterList from './FilterList';
+import { Button, Card, Image } from 'semantic-ui-react';
 
-// Maybe this is a better approach:
-// https://medium.com/@quintonbrown8101/javascript-filter-using-react-hooks-in-a-functional-component-2bae7ff7066
-
-// - You think it's flawed as CardList is not reusable
-// - Logic is too spread and not too reusable
-// - Try to add Card to the state
-// - useEffect to filter, see post and examples with Objects as state in other wodgets
-
-const Filter = ({ options }) => {
+const Filter = ({ options, list }) => {
 	const [activeOptions, changeOptions] = useState([]);
 
 	// Either add or remove the chosen option from the activeOptions state arr
@@ -41,14 +33,39 @@ const Filter = ({ options }) => {
 		);
 	});
 
-	// Pass down the activeOptions down to the list that has to be filtered
+	// Filter the passed down list with the active (checked) passed parameters
+	const filteredAndRenderList = (itemsList) => {
+		if (activeOptions.length) {
+			return itemsList
+				.filter((listItem) => activeOptions.includes(listItem.type))
+				.map((listItem) => {
+					return (
+						<Card className={listItem.type} key={listItem.id}>
+							<Card.Content>
+								<Card.Header>{listItem.name}</Card.Header>
+							</Card.Content>
+							<Card.Content extra>{listItem.icon}</Card.Content>
+						</Card>
+					);
+				});
+		} else {
+			return itemsList.map((listItem) => {
+				return (
+					<Card className={listItem.type} key={listItem.id}>
+						<Card.Content>
+							<Card.Header>{listItem.name}</Card.Header>
+						</Card.Content>
+						<Card.Content extra>{listItem.icon}</Card.Content>
+					</Card>
+				);
+			});
+		}
+	};
+
 	return (
 		<div>
 			<form>{renderOptions}</form>
-
-			<div>
-				<FilterList activeOptions={activeOptions} />
-			</div>
+			{filteredAndRenderList(list)}
 		</div>
 	);
 };
